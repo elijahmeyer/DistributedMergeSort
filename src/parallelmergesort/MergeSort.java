@@ -5,11 +5,12 @@
  */
 package parallelmergesort;
 import java.rmi.*;
+import java.util.ArrayList;
 /**
  *
  * @author elija
  */
 public interface MergeSort extends Remote {
-    public int[] mergeSort(int[] values) throws RemoteException;
+    public ArrayList<Integer> mergeSort(ArrayList<Integer> values) throws RemoteException;
     
 }

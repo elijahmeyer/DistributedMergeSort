@@ -8,15 +8,17 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
 import java.util.Scanner;
 /**
  *
  * @author elija
  */
 public class Client {
-    private int[] values;
+    private ArrayList<Integer> values;
+    public ArrayList<Integer> sortedValues;
     
-    public Client(int[] values) throws RemoteException {
+    public Client(ArrayList<Integer> values) throws RemoteException {
         this.values = values;
     }
     
@@ -24,12 +26,8 @@ public class Client {
         try {
             Registry reg = LocateRegistry.getRegistry("localhost", 9999);
             MergeSort ms = (MergeSort)reg.lookup("hi server");
-            int[] outputs = ms.mergeSort(this.values);
-            System.out.print("Output: ");
-            for (int i = 0; i < outputs.length; i++) {
-                System.out.print(outputs[i] + " ");
-            }
-            System.out.println("");
+            ArrayList<Integer> outputs = ms.mergeSort(this.values);
+            this.sortedValues = outputs;
         }
         catch (NotBoundException|RemoteException e) {
             System.out.println("Client error: " + e);
